@@ -55,9 +55,6 @@ public class MyView extends View implements View.OnTouchListener {
 
     //------------
     private MemoryInt mPointNum;
-    private int firstPointId;
-    private int secondPointId;
-    private int[] mPointIds;
 
     private enum Touch_Type{
         ZOOM,MOVE,SWIPE,NONE
@@ -134,13 +131,12 @@ public class MyView extends View implements View.OnTouchListener {
         svgCanvas = new Canvas(svgBitmap);
         mCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.aa), 0, 0, null);
         svgCanvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.aa), 0, 0, null);
-//        mCanvas.drawColor(Color.BLACK);
     }
 
     public void clickDrawPath(){
         OLPath olPath = new OLPath(3, Color.WHITE);
         mPath = SVGParser.parsePath(Paths.INDOMINUS_REX);
-//                canvas.drawPath(path,mPaint);
+
         Matrix m = new Matrix();
         m.setScale(0.5f,0.5f);
         mPath.transform(m);
@@ -155,7 +151,6 @@ public class MyView extends View implements View.OnTouchListener {
     protected void onDraw(Canvas canvas) {
 //        canvas.drawColor(Color.DKGRAY);
         drawLine(canvas);
-//        RectF rectF = getMatrixRectF();
         switch (touchType){
             case MOVE:
             case ZOOM:
@@ -163,36 +158,13 @@ public class MyView extends View implements View.OnTouchListener {
                 canvas.drawBitmap(mBitmap, mMatrix, null);
                 break;
             case NONE:
-                RectF matrixRectF = getMatrixRectF();
-                int width = getWidth();
-                int height = getHeight();
-                float scale = getScale();
-//                int right = (int) (matrixRectF.right/scale);
-//                int bottom = (int) (matrixRectF.bottom/scale);
-//                rect.set(left,top,right,bottom);
-//                float mwidth = matrixRectF.width();
-//                float v = matrixRectF.left / mwidth*width;
-//                float v1 = matrixRectF.right / mwidth * width;
-//                setSrcRect(rect);
-//                ForegroundDrawable foregroundDrawable = new ForegroundDrawable();
                 clearCanvas(svgCanvas);
-//                clearCanvas(mCanvas);
-
-//                Path path = SVGParser.parsePath(Paths.INDOMINUS_REX);
-//                mCanvas.drawPath(path,mPaint);
                 if(mPath!=null){
                     OLPath newPath = new OLPath(3 * getScale(), Color.WHITE);
                     mPath.transform(mMatrix, newPath.getmPath());
                     svgCanvas.drawPath(newPath.getmPath(),newPath.getmPaint());
                 }
 
-//                SVG svgFromResource = SVGParser.getSVGFromResource(getResources(), R.raw.w5_outerwear);
-//                RectF bounds = svgFromResource.getBounds();
-//                Picture picture = svgFromResource.getPicture();
-//                PictureDrawable pictureDrawable = new PictureDrawable(picture);
-//                pictureDrawable.draw(canvas);
-//                foregroundDrawable.draw(canvas);
-//                canvas.drawBitmap(mBitmap,rect,des,null);
                 canvas.drawBitmap(svgBitmap, 0,0, null);
         }
     }
