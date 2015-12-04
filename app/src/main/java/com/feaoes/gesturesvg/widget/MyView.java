@@ -93,16 +93,6 @@ public class MyView extends View implements View.OnTouchListener {
             postInvalidate();
             isAutoScale = false;
             touchType= Touch_Type.NONE;
-
-/*            if((tempScale>1.0f&&currentScale<mTargetScale)||(tempScale<1.0f&&currentScale>mTargetScale)){
-                postDelayed(this,10);
-            }else{
-                mMatrix.postScale(mTargetScale/currentScale,mTargetScale/currentScale,x,y);
-                checkBorderAndCenterWhenScale();
-                postInvalidate();
-                isAutoScale = false;
-                touchType=Touch_Type.NONE;
-            }*/
         }
     }
 
